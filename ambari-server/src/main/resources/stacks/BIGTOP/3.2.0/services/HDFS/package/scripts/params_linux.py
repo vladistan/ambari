@@ -51,6 +51,7 @@ tmp_dir = Script.get_tmp_dir()
 
 architecture = get_architecture()
 
+service_name = 'hdfs'
 stack_name = status_params.stack_name
 stack_root = Script.get_stack_root()
 upgrade_direction = default("/commandParams/upgrade_direction", None)
@@ -247,7 +248,7 @@ hdfs_site = config['configurations']['hdfs-site']
 
 
 if namenode_federation_enabled(hdfs_site):
-  jn_edits_dirs = get_properties_for_all_nameservices(hdfs_site, 'dfs.journalnode.edits.dir').values()
+  jn_edits_dirs = list(get_properties_for_all_nameservices(hdfs_site, 'dfs.journalnode.edits.dir').values())
 else:
   jn_edits_dirs = [config['configurations']['hdfs-site']['dfs.journalnode.edits.dir']]
 
@@ -258,7 +259,7 @@ namenode_dirs_created_stub_dir = hdfs_log_dir
 namenode_dirs_stub_filename = "namenode_dirs_created"
 
 smoke_hdfs_user_dir = format("/user/{smoke_user}")
-smoke_hdfs_user_mode = 0770
+smoke_hdfs_user_mode = 0o770
 
 hdfs_namenode_format_disabled = default("/configurations/cluster-env/hdfs_namenode_format_disabled", False)
 hdfs_namenode_formatted_mark_suffix = "/namenode-formatted/"
@@ -314,7 +315,7 @@ namenode_rpc = None
 dfs_ha_namemodes_ids_list = []
 other_namenode_id = None
 
-for ns, dfs_ha_namenode_ids in dfs_ha_namenode_ids_all_ns.iteritems():
+for ns, dfs_ha_namenode_ids in dfs_ha_namenode_ids_all_ns.items():
   found = False
   if not is_empty(dfs_ha_namenode_ids):
     dfs_ha_namemodes_ids_list = dfs_ha_namenode_ids.split(",")
@@ -439,7 +440,7 @@ is_https_enabled = is_https_enabled_in_hdfs(config['configurations']['hdfs-site'
                                             config['configurations']['hdfs-site']['dfs.https.enable'])
 
 # ranger hdfs plugin section start
-
+ranger_plugin_home = format("{hadoop_home}/../ranger-{service_name}-plugin")
 # ranger host
 ranger_admin_hosts = default("/clusterHostInfo/ranger_admin_hosts", [])
 has_ranger_admin = not len(ranger_admin_hosts) == 0
