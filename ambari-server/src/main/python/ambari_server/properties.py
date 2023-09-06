@@ -171,10 +171,6 @@ class Properties(object):
         return getattr(self._props, name)
       else:
         raise NotImplementedError("The method '{}' is not implemented.".format(name))
-
-  def __contains__(self, key):
-    return  key in self._props
-
   def __contains__(self,key):
     return key in self._props
 
