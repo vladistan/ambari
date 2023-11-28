@@ -82,10 +82,6 @@
         <config-type>kafka-broker</config-type>
         <config-type>kafka-env</config-type>
         <config-type>kafka-log4j</config-type>
-        <config-type>ranger-kafka-plugin-properties</config-type>
-        <config-type>ranger-kafka-audit</config-type>
-        <config-type>ranger-kafka-policymgr-ssl</config-type>
-        <config-type>ranger-kafka-security</config-type>
         <config-type>zookeeper-env</config-type>
         <config-type>zoo.cfg</config-type>
         <config-type>kafka_jaas_conf</config-type>
@@ -94,13 +90,10 @@
 
       <osSpecifics>
         <osSpecific>
-          <osFamily>redhat7,openeuler22</osFamily>
+          <osFamily>redhat9,redhat7</osFamily>
           <packages>
             <package>
               <name>kafka_${stack_version}</name>
-            </package>
-            <package>
-              <name>ranger_${stack_version}-kafka-plugin</name>
             </package>
           </packages>
         </osSpecific>
