@@ -171,7 +171,7 @@ class OS_CONST_TYPE(type):
 
 
 class OSConst(metaclass=OS_CONST_TYPE):
-  systemd_redhat_os_major_versions = ["7"]
+  systemd_redhat_os_major_versions = ["7", "8", "9"]
 
 
 class OSCheck:
@@ -261,6 +261,8 @@ class OSCheck:
     elif operatingSystem.startswith('suse linux enterprise server'):
       operatingSystem = 'sles'
     elif operatingSystem.startswith('red hat enterprise linux'):
+      operatingSystem = 'redhat'
+    elif operatingSystem.startswith('centos'):
       operatingSystem = 'redhat'
     elif operatingSystem.startswith('openEuler release'):
       operatingSystem = 'openeuler'
