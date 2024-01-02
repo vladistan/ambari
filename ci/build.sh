@@ -9,7 +9,7 @@ export PATH=$PATH:/usr/local/apache-ant-1.9.16/bin/
 
 mvn clean install rpm:rpm -DskipTests -Drat.skip=true
 
-mkidr -p output
+mkdir -p output
 RPMS=$(find . -type f | grep \.rpm$)
 
 cp $RPMS output
