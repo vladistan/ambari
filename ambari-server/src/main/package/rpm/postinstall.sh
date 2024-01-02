@@ -20,6 +20,7 @@ INSTALL_HELPER="${RPM_INSTALL_PREFIX}/var/lib/ambari-server/install-helper.sh"
 case "$1" in
   1) # Action install
     if [ -f "$INSTALL_HELPER" ]; then
+        chmod o+rx,g+rx ${INSTALL_HELPER}
         ${INSTALL_HELPER} install
     fi
   ;;
