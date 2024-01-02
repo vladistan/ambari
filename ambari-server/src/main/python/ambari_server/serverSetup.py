@@ -80,7 +80,7 @@ UNTAR_JDK_ARCHIVE = "tar --no-same-owner -xvf {0}"
 JDK_PROMPT = "[{0}] {1}\n"
 JDK_VALID_CHOICES = "^[{0}{1:d}]$"
 
-JDK_VERSION_CHECK_CMD = """{0} -version 2>&1 | grep -i version | sed 's/.*version ".*\.\(.*\)\..*"/\\1/; 1q' 2>&1"""
+JDK_VERSION_CHECK_CMD = """{0} -version 2>&1 | grep -i version 2>&1"""
 
 def get_supported_jdbc_drivers():
   factory = DBMSConfigFactory()
@@ -1276,6 +1276,7 @@ def check_ambari_java_version_is_valid(java_home, java_bin, min_version, propert
   print('Check JDK version for Ambari Server...')
   try:
     command = JDK_VERSION_CHECK_CMD.format(os.path.join(java_home, 'bin', java_bin))
+
     process = subprocess.Popen(command,
                                stdout=subprocess.PIPE,
                                stdin=subprocess.PIPE,
@@ -1288,6 +1289,9 @@ def check_ambari_java_version_is_valid(java_home, java_bin, min_version, propert
       err = "Checking JDK version command returned with exit code %s" % process.returncode
       raise FatalException(process.returncode, err)
     else:
+      version_match = re.search(r'"(\d+)\.\d+\.\d+', out)
+      if version_match:
+        out = version_match.group(1)
       actual_jdk_version = int(out)
       print('JDK version found: {0}'.format(actual_jdk_version))
       if actual_jdk_version < min_version:
