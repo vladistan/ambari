@@ -8,3 +8,11 @@ export PATH=$PATH:/var/go/.pyenv/versions/2.7.18/bin
 export PATH=$PATH:/usr/local/apache-ant-1.9.16/bin/
 
 mvn clean install rpm:rpm -DskipTests -Drat.skip=true
+
+mkidr -p output
+RPMS=$(find . -type f | grep \.rpm$)
+
+cp $RPMS output
+tar -C output -czf ambari-dist.tgz .
+ls -ltra ambari-dist.tgz
+
