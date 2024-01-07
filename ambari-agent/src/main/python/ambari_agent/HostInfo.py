@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 '''
 Licensed to the Apache Software Foundation (ASF) under one
@@ -27,6 +27,8 @@ import shlex
 import socket
 import subprocess
 import time
+
+import sentry_sdk
 
 from ambari_commons import OSCheck, OSConst
 from ambari_commons.firewall import Firewall
@@ -378,9 +380,10 @@ class HostInfoLinux(HostInfo):
       service_check_live[1] = service_name
     try:
       code, out, err = shell.call(service_check_live, stdout = subprocess.PIPE, stderr = subprocess.PIPE,
-                                  timeout = 5, quiet = True, universal_newlines=True)
+                                  timeout = 5, quiet = True)
       return out, err, code
     except Exception as ex:
+      sentry_sdk.capture_exception(ex)
       logger.warn("Checking service {0} status failed".format(service_name))
       return '', str(ex), 1
 

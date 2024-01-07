@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 """
 Licensed to the Apache Software Foundation (ASF) under one
@@ -21,6 +21,7 @@ limitations under the License.
 import logging
 import socket
 import time
+import sentry_sdk
 from alerts.base_alert import BaseAlert
 from resource_management.libraries.functions.get_port_from_url import get_port_from_url
 from ambari_commons import OSCheck
@@ -174,6 +175,7 @@ class PortAlert(BaseAlert):
 
         return (result, [seconds, port])
       except Exception as e:
+        sentry_sdk.capture_exception(e)
         exceptions.append(e)
       finally:
         if s is not None:

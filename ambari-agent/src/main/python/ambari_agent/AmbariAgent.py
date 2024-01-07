@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 """
 Licensed to the Apache Software Foundation (ASF) under one
@@ -21,6 +21,8 @@ limitations under the License.
 import os
 import sys
 import subprocess
+import sentry_sdk
+    
 
 AGENT_AUTO_RESTART_EXIT_CODE = 77
 
@@ -94,4 +96,5 @@ def main():
 
 
 if __name__ == "__main__":
+    sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
     main()
