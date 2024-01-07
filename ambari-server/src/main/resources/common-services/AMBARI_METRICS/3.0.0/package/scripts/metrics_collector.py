@@ -22,6 +22,9 @@ from resource_management.libraries.script import Script
 from resource_management.libraries.functions.security_commons import build_expectations, \
   cached_kinit_executor, get_params_from_filesystem, validate_security_config_properties, \
   FILE_TYPE_XML
+
+import sentry_sdk
+
 from ams import ams
 from ams_service import ams_service
 from hbase import hbase
@@ -87,4 +90,5 @@ class AmsCollectorWindows(AmsCollector):
     self.configure(env) # for security
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   AmsCollector().execute()

@@ -24,6 +24,7 @@ from status import check_service_status
 from ams import ams
 from resource_management.core.logger import Logger
 from resource_management.core import sudo
+import sentry_sdk
 
 class AmsGrafana(Script):
   def install(self, env):
@@ -81,4 +82,5 @@ class AmsGrafana(Script):
     return [status_params.grafana_pid_file]
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   AmsGrafana().execute()

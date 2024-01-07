@@ -25,6 +25,7 @@ from hbase_service import hbase_service
 from hbase_decommission import hbase_decommission
 from resource_management.libraries.functions.check_process_status import check_process_status
 
+import sentry_sdk
          
 class HbaseMaster(Script):
   def install(self, env):
@@ -67,4 +68,5 @@ class HbaseMaster(Script):
 
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   HbaseMaster().execute()

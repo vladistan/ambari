@@ -19,6 +19,9 @@ limitations under the License.
 """
 
 from resource_management.libraries.script.script import Script
+
+import sentry_sdk
+
 from ams import ams
 from ams_service import ams_service
 from status import check_service_status
@@ -75,5 +78,6 @@ class AmsMonitor(Script):
                                                 equal_valid=True)
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   AmsMonitor().execute()
 

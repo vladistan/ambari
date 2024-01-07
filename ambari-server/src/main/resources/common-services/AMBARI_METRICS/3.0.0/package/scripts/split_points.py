@@ -24,6 +24,7 @@ import re
 import math
 import collections
 import ast
+import sentry_sdk
 
 metric_filename_ext = '.txt'
 # 5 regions for higher order aggregate tables
@@ -243,4 +244,5 @@ def main(argv = None):
     print('Cannot find service metrics dir in %s' % scriptDir)
 
 if __name__ == '__main__':
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   main(sys.argv)

@@ -28,6 +28,8 @@ from ambari_commons import OSConst
 from ambari_commons.os_family_impl import OsFamilyFuncImpl, OsFamilyImpl
 from ambari_commons.parallel_processing import PrallelProcessResult, execute_in_parallel, SUCCESS
 
+import sentry_sdk
+
 import http.client
 import ambari_commons.network as network
 import urllib.request, urllib.parse, urllib.error
@@ -301,5 +303,6 @@ def post_metrics_to_collector(ams_metrics_post_url, metric_collector_host, metri
         raise Fail("Metrics were not saved. POST request status: %s %s \n%s" %
                    (response.status, response.reason, data))
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   AMSServiceCheck().execute()
 
