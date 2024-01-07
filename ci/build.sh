@@ -7,6 +7,7 @@ export PATH=$PATH:/usr/local/pyenv/bin
 export PATH=$PATH:/var/go/.pyenv/versions/2.7.18/bin
 export PATH=$PATH:/usr/local/apache-ant-1.9.16/bin/
 
+mvn versions:set-property -Dproperty=revision -DnewVersion=3.0.0.0.${GO_PIPELINE_LABEL}
 mvn clean install rpm:rpm -DskipTests -Drat.skip=true
 
 mkdir -p output
