@@ -47,7 +47,6 @@ def run_os_command(cmd):
                              stdout=subprocess.PIPE,
                              stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE,
-                             universal_newlines=True
   )
   (stdoutdata, stderrdata) = process.communicate()
   return process.returncode, stdoutdata, stderrdata
