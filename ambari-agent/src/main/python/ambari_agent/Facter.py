@@ -48,7 +48,9 @@ def run_os_command(cmd):
                              stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE,
   )
-  (stdoutdata, stderrdata) = process.communicate()
+  stdoutdata, stderrdata = process.communicate()
+  stdoutdata = stdoutdata.decode('utf-8')
+  stderrdata = stderrdata.decode('utf-8')
   return process.returncode, stdoutdata, stderrdata
 
 
