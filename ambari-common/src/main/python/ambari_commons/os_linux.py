@@ -45,7 +45,6 @@ def os_run_os_command(cmd, env=None, shell=False, cwd=None):
                              env=env,
                              cwd=cwd,
                              shell=shell,
-                             universal_newlines=True
   )
   print_info_msg("\nprocess_pid=" + str(process.pid))
   (stdoutdata, stderrdata) = process.communicate()

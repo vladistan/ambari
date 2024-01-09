@@ -287,7 +287,7 @@ def launch_subprocess(command, term_geometry=(42, 255), env=None):
     environ.update(env)
 
   return PopenEx(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                 shell=is_shell, preexec_fn=_geometry_helper, close_fds=True, env=environ, universal_newlines=True)
+                 shell=is_shell, preexec_fn=_geometry_helper, close_fds=True, env=environ, )
 
 
 def chunks_reader(cmd, kill_timer):
@@ -781,7 +781,7 @@ class shellRunnerWindows(shellRunner):
       cmd = " ".join(script)
     else:
       cmd = script
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False, universal_newlines=True)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False, )
     out, err = p.communicate()
     code = p.wait()
     _logger.debug("Exitcode for %s is %d" % (cmd, code))
@@ -797,7 +797,7 @@ class shellRunnerWindows(shellRunner):
     elif script_block:
       cmd = ['powershell', '-WindowStyle', 'Hidden', '-Command', script_block] + list(args)
 
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False, universal_newlines=True)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=False, )
     out, err = p.communicate()
     code = p.wait()
     _logger.debug("Exitcode for %s is %d" % (cmd, code))
@@ -835,7 +835,7 @@ class shellRunnerLinux(shellRunner):
 
     cmd_list = ["/bin/bash", "--login", "--noprofile", "-c", cmd]
     p = subprocess.Popen(cmd_list, preexec_fn=self._change_uid, stdout=subprocess.PIPE,
-                           stderr=subprocess.PIPE, shell=False, close_fds=True, universal_newlines=True)
+                           stderr=subprocess.PIPE, shell=False, close_fds=True, )
     out, err = p.communicate()
     code = p.wait()
     _logger.debug("Exitcode for %s is %d" % (cmd, code))

@@ -682,7 +682,7 @@ class PGConfig(LinuxDBMSConfig):
                                    stdout=subprocess.PIPE,
                                    stdin=subprocess.PIPE,
                                    stderr=subprocess.PIPE,
-                                   universal_newlines=True
+                                   
         )
         out, err = process.communicate()
         retcode = process.returncode
@@ -1248,7 +1248,7 @@ class SQLAConfig(LinuxDBMSConfig):
                                stdout=subprocess.PIPE,
                                stdin=subprocess.PIPE,
                                stderr=subprocess.PIPE,
-                               universal_newlines=True
+                               
     )
 
     out, err = process.communicate()

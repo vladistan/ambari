@@ -348,7 +348,6 @@ def os_run_os_command(cmd, env=None, shell=False, cwd=None):
                              env=env,
                              cwd=cwd,
                              shell=shell,
-                             universal_newlines=True
   )
   (stdoutdata, stderrdata) = process.communicate()
   return process.returncode, stdoutdata, stderrdata
