@@ -40,7 +40,7 @@ def get_mounted():
   if p.wait() != 0:
     raise Fail("Getting list of mounts (calling mount) failed")
 
-  mounts = [x.split(' ') for x in out.strip().split('\n')]
+  mounts = [x.split(' ') for x in out.decode('utf-8').strip().split('\n')]
 
   results = []
   for m in mounts:
