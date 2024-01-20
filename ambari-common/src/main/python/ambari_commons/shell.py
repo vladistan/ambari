@@ -382,7 +382,7 @@ def queue_reader(cmd, q, timeout, timer):
   while not q.empty:
     str_line = q.get(timeout)
     if str_line:
-      yield str_line.strip(os.linesep)
+      yield str_line.decode('utf-8').strip(os.linesep)
 
     if cmd.poll() is not None and timer.is_alive():
       timer.cancel()
