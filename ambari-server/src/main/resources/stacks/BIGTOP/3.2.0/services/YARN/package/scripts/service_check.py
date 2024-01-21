@@ -23,6 +23,9 @@ import sys
 import ambari_simplejson as json # simplejson is much faster comparing to Python 2.6 json module and has the same functions set.
 import re
 import subprocess
+
+import sentry_sdk
+
 from ambari_commons import os_utils
 from ambari_commons import OSConst
 from ambari_commons.os_family_impl import OsFamilyImpl
@@ -181,4 +184,5 @@ class ServiceCheckDefault(ServiceCheck):
     return active_rm_webapp_address
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   ServiceCheck().execute()

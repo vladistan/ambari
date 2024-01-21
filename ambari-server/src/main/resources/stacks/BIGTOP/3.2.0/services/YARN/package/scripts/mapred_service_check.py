@@ -20,6 +20,9 @@ Ambari Agent
 """
 
 import sys
+
+import sentry_sdk
+
 from resource_management.libraries.script.script import Script
 from resource_management.libraries.resources.execute_hadoop import ExecuteHadoop
 from resource_management.libraries.functions.format import format
@@ -175,4 +178,5 @@ class MapReduce2ServiceCheckDefault(MapReduce2ServiceCheck):
 
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   MapReduce2ServiceCheck().execute()

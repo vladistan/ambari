@@ -19,6 +19,8 @@ Ambari Agent
 
 """
 
+import sentry_sdk
+
 from resource_management.libraries.script.script import Script
 from resource_management.libraries.functions import stack_select
 from resource_management.libraries.functions import StackFeature
@@ -258,4 +260,5 @@ class ResourcemanagerDefault(Resourcemanager):
     return [status_params.resourcemanager_pid_file]
   
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   Resourcemanager().execute()

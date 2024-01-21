@@ -22,6 +22,8 @@ Ambari Agent
 import os
 import sys
 
+import sentry_sdk
+
 # Local imports
 from resource_management.libraries.script.script import Script
 from resource_management.libraries.functions import stack_select
@@ -88,4 +90,5 @@ class MapReduce2ClientDefault(MapReduce2Client):
 
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   MapReduce2Client().execute()

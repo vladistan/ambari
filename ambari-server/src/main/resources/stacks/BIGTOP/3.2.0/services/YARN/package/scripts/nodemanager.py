@@ -19,6 +19,8 @@ Ambari Agent
 
 """
 
+import sentry_sdk
+
 import nodemanager_upgrade
 
 from resource_management.libraries.script.script import Script
@@ -99,4 +101,5 @@ class NodemanagerDefault(Nodemanager):
     return [status_params.nodemanager_pid_file]
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   Nodemanager().execute()

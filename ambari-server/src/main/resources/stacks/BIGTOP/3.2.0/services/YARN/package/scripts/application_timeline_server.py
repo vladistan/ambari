@@ -19,6 +19,8 @@ Ambari Agent
 
 """
 
+import sentry_sdk
+
 from resource_management.libraries.script.script import Script
 from resource_management.libraries.functions import stack_select
 from resource_management.libraries.functions.constants import StackFeature
@@ -94,4 +96,5 @@ class ApplicationTimelineServerDefault(ApplicationTimelineServer):
     return [status_params.yarn_historyserver_pid_file]
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   ApplicationTimelineServer().execute()

@@ -19,6 +19,8 @@ Ambari Agent
 
 """
 
+import sentry_sdk
+
 from resource_management.libraries.script.script import Script
 from resource_management.libraries.resources.hdfs_resource import HdfsResource
 from resource_management.libraries.functions import stack_select
@@ -101,4 +103,5 @@ class HistoryServerDefault(HistoryServer):
     return [status_params.mapred_historyserver_pid_file]
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   HistoryServer().execute()
