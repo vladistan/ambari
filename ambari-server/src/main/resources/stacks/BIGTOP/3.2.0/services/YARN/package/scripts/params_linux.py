@@ -148,8 +148,7 @@ hadoop_conf_dir = conf_select.get_hadoop_conf_dir()
 mapred_bin = format("{hadoop_mapred_home}/sbin")
 yarn_bin = format("{hadoop_yarn_home}/sbin")
 yarn_container_bin = format("{hadoop_yarn_home}/bin")
-yarn_hbase_conf_dir = format("{hadoop_yarn_home}/hbase-conf")
-yarn_hbase_user = "hbase"
+use_external_hbase = True
 
 hadoop_java_io_tmpdir = os.path.join(tmp_dir, "hadoop_java_io_tmpdir")
 
