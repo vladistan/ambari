@@ -48,6 +48,8 @@ def os_run_os_command(cmd, env=None, shell=False, cwd=None):
   )
   print_info_msg("\nprocess_pid=" + str(process.pid))
   (stdoutdata, stderrdata) = process.communicate()
+  stdoutdata = stdoutdata.decode('utf-8')
+  stderrdata = stderrdata.decode('utf-8')
   return process.returncode, stdoutdata, stderrdata
 
 def os_change_owner(filePath, user, recursive):
