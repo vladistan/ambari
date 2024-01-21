@@ -147,14 +147,6 @@ def yarn(name=None, config_dir=None):
             mode=0o644
   )
 
-  XmlConfig("resource-types.xml",
-            conf_dir=config_dir,
-            configurations=params.config['configurations']['resource-types'],
-            configuration_attributes=params.config['configurationAttributes']['resource-types'],
-            owner=params.yarn_user,
-            group=params.user_group,
-            mode=0o644
-            )
   File(format("{limits_conf_dir}/yarn.conf"),
        mode=0o644,
        content=Template('yarn.conf.j2')
