@@ -21,6 +21,8 @@ limitations under the License.
 import glob
 import os
 
+import sentry_sdk
+
 from resource_management.core import shell, sudo
 from resource_management.core.logger import Logger
 from resource_management.core.resources import Directory
@@ -528,7 +530,7 @@ class ZeppelinServer(Script):
         del interpreter_settings[key]
 
     hive_interactive_properties_key = 'hive_interactive'
-    for setting_key in interpreter_settings.keys():
+    for setting_key in list(interpreter_settings.keys()):
       interpreter = interpreter_settings[setting_key]
       if interpreter['group'] == 'jdbc' and interpreter['name'] == 'jdbc' and ('jdbc' not in exclude_interpreter_autoconfig_list
                                                                or 'jdbc' in exclude_interpreter_property_groups_map.keys()):
@@ -671,4 +673,5 @@ class ZeppelinServer(Script):
     return glob.glob(params.zeppelin_home + '/interpreter/spark/dep/zeppelin-spark-dependencies*.jar')
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   ZeppelinServer().execute()
