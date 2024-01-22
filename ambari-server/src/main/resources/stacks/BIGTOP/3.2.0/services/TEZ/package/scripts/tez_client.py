@@ -21,6 +21,8 @@ Ambari Agent
 import os
 import urllib.parse
 
+import sentry_sdk
+
 from ambari_commons import OSConst
 from ambari_commons.inet_utils import download_file
 from ambari_commons.os_family_impl import OsFamilyImpl
@@ -127,4 +129,5 @@ class TezClientWindows(TezClient):
     return hadoop_classpath_prefix
 
 if __name__ == "__main__":
+  sentry_sdk.init( dsn="https://b1e58758ecb542448fa470e97fb08b5b@sentry.r4.v-lad.org/4",)
   TezClient().execute()
