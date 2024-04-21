@@ -1289,6 +1289,7 @@ def check_ambari_java_version_is_valid(java_home, java_bin, min_version, propert
       err = "Checking JDK version command returned with exit code %s" % process.returncode
       raise FatalException(process.returncode, err)
     else:
+      out = str(out)
       version_match = re.search(r'"(\d+)\.\d+\.\d+', out)
       if version_match:
         out = version_match.group(1)
